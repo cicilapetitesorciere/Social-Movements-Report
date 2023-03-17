@@ -1,22 +1,49 @@
 \documentclass{article}
 
+\usepackage{amsmath}
+\usepackage{diffcoeff}
+
 \title{AMATH 383 Project}
-\author{Alyssa, Ciaran, Gianna, Zaheer}
+\author{
+    Alyssa Baksh, 
+    Ciaran Neely,
+    Gianna Biino,
+    Zaheer Mohideen
+}
 
 \begin{document}
 
     \maketitle
     
-
+    \hrule
     \section{Abstract}
-    This is an Abstract with a citation\cite{gonzalez-bailon_dynamics_2011}. Another edit
+    This is an Abstract with a citation\cite{kaveh_defining_2020}, and another citation\cite{small_movements_2021}.
+    \hrule
     \section{Introduction}
+    About 1 Page and a half
     \section{Methods}
+        Let $M(t)$ be the number of people engaged in the social movement at time $t$, and let $S(t)$ be the number of social media users who are aware of the movement at time $t$. Let $A(t)$ be the number of active social media users at time $t$, and let $P(t)$ be the population of the community where the social movement is taking place. Then, the following equations can be used:
+        \begin{align}
+            \diff Mt &= k_1 S(t) \left[1 - \frac{M(t)}{P(t)}\right] - k_2M(t)\\
+            \nonumber\\
+            \diff St &= k_3 S(t)\left[1 - \frac{S(t)}{A(t)}\right] + k_4 F(t) - k_5 S(t)M(t)\\
+            \nonumber\\
+            \diff At &= k_6 P(t) + k_7A(t) - k_8A(t)\frac{S(t)}{P(t)}
+        \end{align}
+        In these equations, $k_1$ is the rate at which social media users become engaged in the movement, $k_2$ is the rate at which people disengage from the movement, $k_3$ is the rate at which social media users become aware of the movement, $k_4$ is the rate at which influencers promote the movement, $k_5$ is the rate at which people disengage from the movement due to social media overload, $F(t)$ is the number of trending posts related to the movement at time $t$, $k_6$ is the rate at which the population of the community where the movement is taking place increases, $k_7$ is the rate at which social media users join the platform, and $k_8$ is the rate at which social media users leave the platform due to social media overload or other factors.
+        
+        The first equation describes how the size of the movement changes over time, with the number of people becoming engaged in the movement being proportional to the number of social media users who are aware of it and the available population who may join the movement, but also subject to a rate of disengagement.
+        
+        The second equation describes how the awareness of the movement changes over time, with the number of social media users becoming aware of it being proportional to the number of users who are already aware of it, as well as the rate at which influencers promote it. The rate of awareness is also subject to a rate of disengagement due to social media overload, which is proportional to the product of the number of social media users and the number of people engaged in the movement.
+        
+        The third equation describes how the number of active social media users changes over time, with the number of users increasing due to population growth and social media adoption, but also subject to a rate of decline due to social media overload or other factors, which is proportional to the product of the number of social media users and the number of people engaged in the movement relative to the population size.
+        
+        These equations can be used to model the growth and spread of a social movement on social media while accounting for additional factors such as population growth, social media adoption, and social media overload. The parameters can be adjusted to reflect the specific characteristics of the movement and the social media platforms being used.
     \section{Results}
     \section{Discussion}
-    \section{References}
+    \newpage
     \bibliographystyle{plain}
-    \bibliography{refs}
+    \bibliography{references}
     
 
 \end{document}
