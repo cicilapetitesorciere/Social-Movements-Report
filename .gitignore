@@ -5,4 +5,5 @@
 *.gz
 *.bbl
 *.blg
-report.pdf
+*.dvi
+*.pdf
