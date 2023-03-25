@@ -2,6 +2,8 @@
 
 \usepackage{amsmath}
 \usepackage{diffcoeff}
+\usepackage{bm}
+\usepackage{comment}
 
 \title{AMATH 383 Project}
 \author{
@@ -14,56 +16,160 @@
 \begin{document}
 
     \maketitle
+
     
-    \hrule
+
+    We assume that people are distributed spatially (represented by $\bm x$ and measured in kilometers), temporally (represented by $t$ and measured in weeks), as well as along an axis $s$ representing their level of support for a given social movement measured as follows:
+    \begin{itemize}
+        \item $s=+4$: Extremist-level support
+        \item $s=+3$: Strong support
+        \item $s=+2$: Moderate support
+        \item $s=+1$: Vague support
+        \item $s=\pm 0$: Neutrality
+        \item $s=-1$: Vague opposition
+        \item $s=-2$: Moderate opposition
+        \item $s=-3$: Strong opposition
+        \item $s=-4$: Extremist-level opposition
+    \end{itemize}
+    Let $p$ be the probability that a given person's level of support for the movement increases, let $q$ be the probability that a given person's level of support for the movement decreases, and let $r$ represent the probability that a given person's level of support does not change. Since these are the probabilities of mutually exclusive events, $p$, $q$ and $r$ must be modelled such that they are all non-negative and $p+q+r=1$. From this we can build the following model using $n_{\bm x}(t,s)$ to represent the number of people who occupy a given position in $(\bm x, t, s)$-space:
+    \[
+        n_{\bm x}(t+\Delta t, s)=r_{\bm x}(t, s)n_{\bm x}(t, s)+p_{\bm x}(t, s-1)n_{\bm x}(t, s-1)+q_{\bm x}(t, s+1)n_{\bm x}(t, s+1)
+    \]
+    We can subract $n_{\bm x}(t,s)$ from both sides and divide by $\Delta t$ to get
+    
+    
     \section{Abstract}
-    This is an Abstract with a citation\cite{kaveh_defining_2020}, and another citation\cite{small_movements_2021}.
-    \hrule
     \section{Introduction}
     Social networks and movements have been a crucial part of society and open a window to explaining many phenomena such as herd mentality and what causes individuals to participate in social movements\cite{diani_networks_2013}.
     
-    Social movements themselves are a sociological analytical concept 'defined as networks of informal interactions between a plurality of individuals, groups and/or organizations, engaged in political or cultural conflicts, on the basis of shared collective identities.' This direction of studies has grown and evolved a lot during the last century. There are important aspects that need to be considered, when defining the dynamics of a social movement: 
+    Social movements themselves are a sociological analytical concept defined as networks of informal interactions between a plurality of individuals, groups and/or organizations, engaged in political or cultural conflicts, on the basis of shared collective identities. This direction of studies has grown and evolved a lot during the last century. There are important aspects that need to be considered, when defining the dynamics of a social movement: 
     \begin{itemize}
-    \item It needs to be a network based on informal interactions between groups and organisations and individuals.
+    \item It needs to be a network based on informal interactions between groups and/or organisations and individuals.
     \item It needs to contain a collective solidarity and shared beliefs.
     \item It needs to engage in conflicts, cultural or political, and promote or dispute social change.
     \item  For the majority of it, the action needs to be outside of routine and institutional procedures of social life.
     \end{itemize}
-    These defining aspects, leave room for adaptation of the concept to specific examples. If for example one study focuses on a global anti-systemic social movement another will focus on a social movement supporting a local system and opposing changes to it\cite{diani_concept_1992}.
+    Thanks to the broad definition of these aspects, the concept can be adapted to specific examles. If, for example, one study focuses on a global anti-systemic social movement another will focus on a social movement supporting a local system and opposing changes to it\cite{diani_concept_1992}.
     
     With the recent surge of social media, the studies of social movements and networks have evolved again, prompting further inquiries on the topic\cite{kumar_structure_2006}.
     
-    Many studies have started to compare how movements founded upon social media compare to those in the past that weren't. For example, the transnational movement in Italy was analyzed to see how digital media, like Facebook, was used by activists to spread their message \cite{pavan_digital_2019}. OTHER EXAMPLES
-
-    SIR
-
-    Using mathematical models, we aim to gain a deeper understanding how social movements progress with time over social media and if we can find a pattern between social movements and various parameters Specifically, we hope to find which parameters and what values are necessary for a social movement to spread? And how can they be used as tools in order to spread a message?
-    It should be kept in mind, that this model will be hypothetical and will lean on simplifications in order to be simple enough to be analyzed.
+    Many studies have started to compare how movements founded upon social media compare to those in the past that weren't\cite{kidd_social_2016}. For example, the transnational movement in Italy was analyzed to see how digital media, like Facebook, was used by activists to spread their message, considering the number of posts, likes and comments over the  years \cite{pavan_digital_2019}. 
     
+    Other studies looked at international movements. For example, one on the \textit{Black Lives Matter} Movement, considering multiple social media platforms and the level of engagement of accounts. This study also discussed the limitations of social media. On one hand, traditional forms of organization still play an important role to sustain and build a movement. On the other hand, through the accessibility of social media, it is hard to maintain the actual goal and values of a movement, since many people can participate with different goals in mind. It is also easier to contradict the movement online by spreading opposing messages. The benefits of social media however, outweigh the costs, as it allows for a bigger scaling of social movements and a broader audience can be reached. \cite{mundt_scaling_2018}
+
+    
+    Using mathematical models, we aim to gain a deeper understanding how social movements progress with time over social media and if we can find a pattern between social movements and various parameters Specifically, we hope to find which parameters and what values are necessary for a social movement to spread and how can they be used as tools in order to spread a message.
+
     \section{Methods}
-        Let $M(t)$ be the number of people engaged in the social movement at time $t$, and let $S(t)$ be the number of social media users who are aware of the movement at time $t$. Let $A(t)$ be the number of active social media users at time $t$, and let $P(t)$ be the population of the community where the social movement is taking place. Then, the following equations can be used:
+
+    
+
+    Let I(t) be the number of people engaged in the social movement at time t, and let E(t) be the number of social media users who are aware of the movement at time t. Let S(t) be the number of active social media users at time t who are not aware of the movement at all, and let P(t) be the population of the community where the social movement is taking place. 
+    
+    We can relate the model equations to a type of SEIR model where I(t) is the number of infected individuals, who are able to spread the disease to S(t) who are the number of Susceptible people. And E(t) acts as the exposed population, those who have come in contact with the disease, or in our case, those who have in come contact with the social movement by seeing social media posts about it.\textbf{Cite SIR model...} 
+    
+    However, in our model we don’t have an $R(t)$, recovered members, because we want to focus on how efficiently people are joining the movement when exposed to social media, rather than focusing on those who are “recovering” from it. Moreover, our model also included density dependence; for the first equation, as $I(t)$ increases, that means there are more infected individuals, and thus there are fewer susceptible people to expose/infect, and thus $I'(t)$ would decrease depending on the population.
+    Before we start stating our equations, we need to clarify some assumptions that our model makes when taking the population and behavior of people into consideration.
+
+    \subsection{Assumptions}
+    
+    Some of the assumptions we'll make are listed here:
+
+    \enu
+    
+    - Everyone has equal access to social media, and our S(t) only focuses on active social media users.
+    
+    - We won't consider a particular social media platform or consider different platforms as a parameter, but rather social media in general. 
+    
+    - We'll consider a closed population which means people who aren't concerned about movement, won't share posts on social media. 
+    
+    - The movement does not experience significant external interventions or disruptions. For example, there isn't an opposing movement that's causing members to leave the other. 
+    
+    - The movement does not have significant internal divisions or conflicts that affect its growth and spread.
+    
+    - The platform used for the movement has a stable user base and does not experience significant changes in its user base or functionality.
+
+    - The population of the community where the movement is taking place is relatively stable and does not experience significant demographic changes.
+
+    - Social media overload can cause people to disengage from the movement and the platform.
+
+    - Influencers all have the same rate of being able to influence others (i.e there aren’t particularly more famous/influential online celebrities that are boosting the cause). 
+
+    - People are equally likely to see trending posts. Once they do, they immediately become "exposed" and then decide if they would like to join the movement or not. 
+
+    - The only way people can become involved in the movement is via social media. 
+
+    \subsection{Model Equations}
+
+     Let I(t) be the number of people engaged in the social movement at time t, and let E(t) be the number of social media users who are aware of the movement at time t. Let S(t) be the number of active social media users at time t, and let P(t) be the population of the community where the social movement is taking place. 
+
+    Then, the following equations can be used:
         \begin{align}
-            \diff Mt &= k_1 S(t) \left[1 - \frac{M(t)}{P(t)}\right] - k_2M(t)
+            \diff It &= k_1 E(t) \left[1 - \frac{I(t)}{P(t)}\right] - k_2I(t)
             \\
-            \diff St &= k_3 S(t)\left[1 - \frac{S(t)}{A(t)}\right] + k_4 F(t) - k_5 S(t)M(t)
+            \diff Et &= k_3 E(t)\left[1 - \frac{E(t)}{(t)}\right] + k_4 F(t) - k_5 E(t)I(t)
             \\
-            \diff At &= k_6 P(t) + k_7A(t) - k_8A(t)\frac{S(t)}{P(t)}
-            \\
-            \diff Pt &= k_9 P(t) - k_{10}M(t)
+            \diff St &= k_6 P(t) - k_7S(t) - k_3 {E(t)}
         \end{align}
-        In these equations, $k_1$ is the rate at which social media users become engaged in the movement, $k_2$ is the rate at which people disengage from the movement, $k_3$ is the rate at which social media users become aware of the movement, $k_4$ is the rate at which influencers promote the movement, $k_5$ is the rate at which people disengage from the movement due to social media overload, $F(t)$ is the number of trending posts related to the movement at time $t$, $k_6$ is the rate at which the population of the community where the movement is taking place increases, $k_7$ is the rate at which social media users join the platform, and $k_8$ is the rate at which social media users leave the platform due to social media overload or other factors.
-        
-        The first equation describes how the size of the movement changes over time, with the number of people becoming engaged in the movement being proportional to the number of social media users who are aware of it and the available population who may join the movement, but also subject to a rate of disengagement.
-        
-        The second equation describes how the awareness of the movement changes over time, with the number of social media users becoming aware of it being proportional to the number of users who are already aware of it, as well as the rate at which influencers promote it. The rate of awareness is also subject to a rate of disengagement due to social media overload, which is proportional to the product of the number of social media users and the number of people engaged in the movement.
-        
-        The third equation describes how the number of active social media users changes over time, with the number of users increasing due to population growth and social media adoption, but also subject to a rate of decline due to social media overload or other factors, which is proportional to the product of the number of social media users and the number of people engaged in the movement relative to the population size.
-        
-        These equations can be used to model the growth and spread of a social movement on social media while accounting for additional factors such as population growth, social media adoption, and social media overload. The parameters can be adjusted to reflect the specific characteristics of the movement and the social media platforms being used.
 
-        In this equation, k9 is the rate at which the population of the community where the social movement is taking place increases due to factors such as birth and immigration. The rate of population growth is subject to a rate of decline due to people disengaging from the movement, which is proportional to the number of people engaged in the movement.
+    In these equations, $k_1$ is the rate at which social media users become engaged in the movement, $k_2$ is the rate at which people disengage from the movement, $k_3$ is the rate at which social media users become aware of the movement, $k_4$ is the rate at which influencers promote the movement, $k_5$ is the rate at which people disengage from the movement due to social media overload, $F(t)$ is the number of trending posts related to the movement at time $t$, $k_6$ is the rate at which the population of the community where the movement is taking place increases and joins the platform, and $k_7$ is the rate at which social media users leave the platform due to social media overload or other factors.
+    
+    The first equation describes how the size of the movement changes over time, with the number of people becoming engaged in the movement being proportional to the number of social media users who are aware of it and the available population who may join the movement, but also subject to a rate of disengagement. 
+    
+	The second equation describes how the awareness of the movement changes over time, with the number of social media users becoming aware of it being proportional to the number of users who are already aware of it, as well as the rate at which influencers promote it. The rate of awareness is also subject to a rate of disengagement due to social media overload, which is proportional to the product of the number of social media users and the number of people engaged in the movement. 
+ 
+	The third equation describes how the number of active social media users changes over time, with the number of users increasing due to population growth and social media adoption, but also subject to a rate of decline due to social media overload or other factors, which is proportional to the product of the number of social media users and the number of people engaged in the movement relative to the population size. 
+ 
+	These equations can be used to model the growth and spread of a social movement on social media while accounting for factors such as population growth, adoption, and overload. The parameters can be adjusted to reflect the specific characteristics of the movement and the social media platforms being used.
+ 
 
-        This equation captures the influence of the community's population size on the social movement and how the movement may affect the community's population growth over time.
+    \subsection{Cases}
+
+    There are certain cases we can take into consideration and analyze depending on the parameters $k_1$ through $k8$. Some of these cases are: 
+
+
+    Case 1: $k_1 > k_2$ and $k_3 > k_5$
+
+
+In this case, the movement is gaining momentum, and social media is a significant driving force behind it. The rate at which social media users become engaged in the movement ($k_1$) is greater than the rate at which people disengage from it ($k_2$), indicating a positive feedback loop. Additionally, the rate at which social media users become aware of the movement ($k_3$) is greater than the rate at which people disengage from the movement due to social media overload ($k_5$). This implies that social media is effectively promoting the movement without overwhelming users with too much information.
+
+Conclusion: The movement is likely to continue growing at a steady rate, and social media is playing a crucial role in its success.
+
+Case 2: $k_1 < k_2$ and $k_3 < k_5$
+
+
+In this case, the movement is losing momentum, and social media is not helping much in promoting it. The rate at which social media users become engaged in the movement ($k_1$) is less than the rate at which people disengage from it ($k_2$), indicating a negative feedback loop. Additionally, the rate at which social media users become aware of the movement (k3) is less than the rate at which people disengage from the movement due to social media overload ($k_5$). This implies that social media is not effectively promoting the movement and may even be contributing to its decline.
+
+Conclusion: The movement is likely to continue losing momentum, and social media is not playing a significant role in its success.
+
+Case 3: $k_1 > k_2$ and $k_3 < k_5$
+
+In this case, the movement is gaining momentum, but social media is not helping much in promoting it. The rate at which social media users become engaged in the movement (k1) is greater than the rate at which people disengage from it (k2), indicating a positive feedback loop. However, the rate at which social media users become aware of the movement (k3) is less than the rate at which people disengage from the movement due to social media overload (k5). This implies that social media is not effectively promoting the movement and may even be contributing to its decline.
+
+Conclusion: The movement is likely to continue growing, but social media is not playing a significant role in its success.
+
+Case 4: $k_1 = k_2$ and $k_3 = k_5$
+
+In this case, the rates of movement growth and social media promotion are equal, indicating that social media is not having a significant impact on the movement. The rate at which social media users become engaged in the movement (k1) is the same as the rate at which people disengage from it (k2), indicating a stable equilibrium. Similarly, the rate at which social media users become aware of the movement (k3) is the same as the rate at which people disengage from the movement due to social media overload (k5), indicating that social media is not promoting the movement more than it is causing users to disengage from it.
+
+Conclusion: The movement is likely to remain at a steady state, and social media is not having a significant impact on its growth or decline.
+
+Case 5: $k_1 < k_2$ and $k_3 > k_5$
+
+In this case, the movement is losing momentum, but social media is still promoting it effectively. The rate at which social media users become engaged in the movement (k1) is less than the rate at which people disengage from it (k2), indicating a negative feedback loop. However, the rate at which social media users become aware of the movement (k3) is greater than the rate at which people disengage from the movement due to social media overload (k5). This implies that social media is still effectively promoting the movement despite its declining popularity.
+
+Conclusion: The movement is likely to continue losing momentum, but social media is still playing a significant role in its success. The declining engagement may be due to factors outside of social media, such as competing priorities or fatigue from long-term activism.
+Case 6: k4 > k5 and k8 > k7
+
+In this case, influencers are effectively promoting the movement (k4 > k5) and social media users are leaving the platform at a slower rate than they are joining it (k8 > k7). This means that while social media may be overwhelming some users, it's still an effective tool for spreading awareness and engaging new supporters.
+
+Conclusion: The movement is likely to continue growing in popularity, but social media may need to find ways to reduce user overload and keep existing users engaged.
+
+Case 7: k5 > k4 and k8 < k7
+In this case, social media overload is causing more people to disengage from the movement (k5 > k4) than influencers are able to promote it (k4 < k5). Additionally, social media users are leaving the platform at a faster rate than they are joining it (k8 < k7), further reducing engagement.
+
+Conclusion: The movement is likely to lose momentum and decline in popularity, as social media is no longer an effective tool for promoting it.
+
     \section{Results}
     \section{Discussion}
     \newpage
