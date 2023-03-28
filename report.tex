@@ -2,8 +2,7 @@
 
 \usepackage{amsmath}
 \usepackage{diffcoeff}
-\usepackage{bm}
-\usepackage{comment}
+\usepackage{amsmath}
 
 \title{AMATH 383 Project}
 \author{
@@ -50,46 +49,69 @@
     Before we start stating our equations, we need to clarify some assumptions that our model makes when taking the population and behavior of people into consideration.
 
     \subsection{Assumptions}
+    WHAT IS R + F is limited
     
     Some of the assumptions we'll make are listed here:
-
+    \begin{enumerate}
+    \item  Everyone has equal access to social media, and our S(t) only focuses on active social media users.
     
-    - Everyone has equal access to social media, and our S(t) only focuses on active social media users.
+    \item We won't consider a particular social media platform or consider different platforms as a parameter, but rather social media in general. 
     
-    - We won't consider a particular social media platform or consider different platforms as a parameter, but rather social media in general. 
+    \item We'll consider a closed population which means people who aren't concerned about movement, won't share posts on social media. 
     
-    - We'll consider a closed population which means people who aren't concerned about movement, won't share posts on social media. 
+    \item The movement does not experience significant external interventions or disruptions. For example, there isn't an opposing movement that's causing members to leave the other. 
     
-    - The movement does not experience significant external interventions or disruptions. For example, there isn't an opposing movement that's causing members to leave the other. 
+    \item The movement does not have significant internal divisions or conflicts that affect its growth and spread.
     
-    - The movement does not have significant internal divisions or conflicts that affect its growth and spread.
-    
-    - The platform used for the movement has a stable user base and does not experience significant changes in its user base or functionality.
+    \item The platform used for the movement has a stable user base and does not experience significant changes in its user base or functionality.
 
-    - The population of the community where the movement is taking place is relatively stable and does not experience significant demographic changes.
+    \item The population of the community where the movement is taking place is relatively stable and does not experience significant demographic changes.
 
-    - Social media overload can cause people to disengage from the movement and the platform.
+    \item Social media overload can cause people to disengage from the movement and the platform.
 
-    - Influencers all have the same rate of being able to influence others (i.e there aren’t particularly more famous/influential online celebrities that are boosting the cause). 
+    \item Influencers all have the same rate of being able to influence others (i.e there aren’t particularly more famous/influential online celebrities that are boosting the cause). 
 
-    - People are equally likely to see trending posts. Once they do, they immediately become "exposed" and then decide if they would like to join the movement or not. 
+    \item People are equally likely to see trending posts. Once they do, they immediately become ``exposed'' and then decide if they would like to join the movement or not. 
 
-    - The only way people can become involved in the movement is via social media. 
-
+    \item The only way people can become involved in the movement is via social media. 
+    \end{enumerate}
     \subsection{Model Equations}
 
-     Let I(t) be the number of people engaged in the social movement at time t, and let E(t) be the number of social media users who are aware of the movement at time t. Let S(t) be the number of active social media users at time t, and let P(t) be the population of the community where the social movement is taking place. 
+     Let $I(t)$ be the number of people engaged in the social movement at time $t$, and let $E(t)$ be the number of social media users who are aware of the movement at time t. Let $S(t)$ be the number of active social media users at time t, let $P(t)$ be the population of the community where the social movement is taking place, and let $F(t)$ is the number of trending posts related to the movement at time $t$;
 
     Then, the following equations can be used:
-        \begin{align}
-            \diff It &= k_1 E(t) \left[1 - \frac{I(t)}{P(t)}\right] - k_2I(t)
-            \\
-            \diff Et &= k_3 E(t)\left[1 - \frac{E(t)}{(t)}\right] + k_4 F(t) - k_5 E(t)I(t)
-            \\
-            \diff St &= k_6 P(t) - k_7S(t) - k_3 {E(t)}
-        \end{align}
+    \begin{subequations}
+    \begin{align}            
+        \diff St &= k_6 P(t) + k_2I(t) + k_5E(t) - k_3 {S(t)I(t)}- k_7S(t)
+        \\
+        \diff Et &= k_3 I(t)S(t) + k_4 F(t) - k_5E(t) - k_1E(t)\left[1 - \frac{I(t)}{S(t)}\right] 
+        \\
+        \diff It &= k_1 E(t) \left[1 - \frac{I(t)}{S(t)}\right] - k_2I(t)
+        \\
+        \diff Rt &= k_7S(t)
+    \end{align}
+    \end{subequations}
+    
+    where
+    \begin{subequations}
+    \begin{align}
+        P(t) &= (S + E + I + R)(t)
+        \\
+        F(t) &= k_8\left[1- e^{-I(t)}\right]
+    \end{align}
+    \end{subequations}
 
-    In these equations, $k_1$ is the rate at which social media users become engaged in the movement, $k_2$ is the rate at which people disengage from the movement, $k_3$ is the rate at which social media users become aware of the movement, $k_4$ is the rate at which influencers promote the movement, $k_5$ is the rate at which people disengage from the movement due to social media overload, $F(t)$ is the number of trending posts related to the movement at time $t$, $k_6$ is the rate at which the population of the community where the movement is taking place increases and joins the platform, and $k_7$ is the rate at which social media users leave the platform due to social media overload or other factors.
+    and where
+    \begin{itemize}
+        \item $k_1$ is the rate at which social media users become engaged in the movement;
+        \item $k_2$ is the rate at which people disengage from the movement;
+        \item $k_3$ is the rate at which social media users become aware of the movement;
+        \item $k_4$ is the rate at which influencers promote the movement;
+        \item $k_5$ is the rate at which people disengage from the movement due to social media overload;
+        \item $k_6$ is the rate at which the population of the community where the movement is taking place increases and joins the platform;
+        \item $k_7$ is the rate at which social media users leave the platform due to social media overload or other factors; and
+        \item $k_8$ is
+    \end{itemize}
     
     The first equation describes how the size of the movement changes over time, with the number of people becoming engaged in the movement being proportional to the number of social media users who are aware of it and the available population who may join the movement, but also subject to a rate of disengagement. 
     
@@ -101,51 +123,50 @@
  
 
     \subsection{Cases}
+    
+    There are certain cases we can take into consideration and analyze depending on the parameters $k_1$ through $k_8$. Some of these cases are: 
+    
+    \subsubsection*{Case 1: $k_1 > k_2$ and $k_3 > k_5$}
+    In this case, the movement is gaining momentum, and social media is a significant driving force behind it. The rate at which social media users become engaged in the movement ($k_1$) is greater than the rate at which people disengage from it ($k_2$), indicating a positive feedback loop. Additionally, the rate at which social media users become aware of the movement ($k_3$) is greater than the rate at which people disengage from the movement due to social media overload ($k_5$). This implies that social media is effectively promoting the movement without overwhelming users with too much information.
 
-    There are certain cases we can take into consideration and analyze depending on the parameters $k_1$ through $k8$. Some of these cases are: 
+    \subsubsection*{Conclusion} The movement is likely to continue growing at a steady rate, and social media is playing a crucial role in its success.
 
+    \subsubsection*{Case 2: $k_1 < k_2$ and $k_3 < k_5$}
+    In this case, the movement is losing momentum, and social media is not helping much in promoting it. The rate at which social media users become engaged in the movement ($k_1$) is less than the rate at which people disengage from it ($k_2$), indicating a negative feedback loop. Additionally, the rate at which social media users become aware of the movement ($k_3$) is less than the rate at which people disengage from the movement due to social media overload ($k_5$). This implies that social media is not effectively promoting the movement and may even be contributing to its decline.
 
-    Case 1: $k_1 > k_2$ and $k_3 > k_5$
+    \subsubsection*{Conclusion} The movement is likely to continue losing momentum, and social media is not playing a significant role in its success.
 
+    \subsubsection*{Case 3: $k_1 > k_2$ and $k_3 < k_5$}
 
-In this case, the movement is gaining momentum, and social media is a significant driving force behind it. The rate at which social media users become engaged in the movement ($k_1$) is greater than the rate at which people disengage from it ($k_2$), indicating a positive feedback loop. Additionally, the rate at which social media users become aware of the movement ($k_3$) is greater than the rate at which people disengage from the movement due to social media overload ($k_5$). This implies that social media is effectively promoting the movement without overwhelming users with too much information.
+    In this case, the movement is gaining momentum, but social media is not helping much in promoting it. The rate at which social media users become engaged in the movement ($k_1$) is greater than the rate at which people disengage from it ($k_2$), indicating a positive feedback loop. However, the rate at which social media users become aware of the movement ($k_3$) is less than the rate at which people disengage from the movement due to social media overload ($k_5$). This implies that social media is not effectively promoting the movement and may even be contributing to its decline.
 
-Conclusion: The movement is likely to continue growing at a steady rate, and social media is playing a crucial role in its success.
+    \subsubsection*{Conclusion} The movement is likely to continue growing, but social media is not playing a significant role in its success.
 
-Case 2: $k_1 < k_2$ and $k_3 < k_5$
+    \subsubsection*{Case 4: $k_1 = k_2$ and $k_3 = k_5$}
 
+    In this case, the rates of movement growth and social media promotion are equal, indicating that social media is not having a significant impact on the movement. The rate at which social media users become engaged in the movement ($k_1$) is the same as the rate at which people disengage from it ($k_2$), indicating a stable equilibrium. Similarly, the rate at which social media users become aware of the movement ($k_3$) is the same as the rate at which people disengage from the movement due to social media overload ($k_5$), indicating that social media is not promoting the movement more than it is causing users to disengage from it.
 
-In this case, the movement is losing momentum, and social media is not helping much in promoting it. The rate at which social media users become engaged in the movement ($k_1$) is less than the rate at which people disengage from it ($k_2$), indicating a negative feedback loop. Additionally, the rate at which social media users become aware of the movement (k3) is less than the rate at which people disengage from the movement due to social media overload ($k_5$). This implies that social media is not effectively promoting the movement and may even be contributing to its decline.
+    \subsubsection*{Conclusion} The movement is likely to remain at a steady state, and social media is not having a significant impact on its growth or decline.
 
-Conclusion: The movement is likely to continue losing momentum, and social media is not playing a significant role in its success.
+    \subsubsection*{Case 5: $k_1 < k_2$ and $k_3 > k_5$}
 
-Case 3: $k_1 > k_2$ and $k_3 < k_5$
+    In this case, the movement is losing momentum, but social media is still promoting it effectively. The rate at which social media users become engaged in the movement ($k_1$) is less than the rate at which people disengage from it ($k_2$), indicating a negative feedback loop. However, the rate at which social media users become aware of the movement ($k_3$) is greater than the rate at which people disengage from the movement due to social media overload ($k_5$). This implies that social media is still effectively promoting the movement despite its declining popularity.
 
-In this case, the movement is gaining momentum, but social media is not helping much in promoting it. The rate at which social media users become engaged in the movement (k1) is greater than the rate at which people disengage from it (k2), indicating a positive feedback loop. However, the rate at which social media users become aware of the movement (k3) is less than the rate at which people disengage from the movement due to social media overload (k5). This implies that social media is not effectively promoting the movement and may even be contributing to its decline.
+    \subsubsection*{Conclusion}
+    The movement is likely to continue losing momentum, but social media is still playing a significant role in its success. The declining engagement may be due to factors outside of social media, such as competing priorities or fatigue from long-term activism.
 
-Conclusion: The movement is likely to continue growing, but social media is not playing a significant role in its success.
+    \subsubsection*{Case 6: $k_4 > k_5$ and $k_8 > k_7$}
 
-Case 4: $k_1 = k_2$ and $k_3 = k_5$
+    In this case, influencers are effectively promoting the movement ($k_4 > k_5$) and social media users are leaving the platform at a slower rate than they are joining it ($k_8 > k_7$). This means that while social media may be overwhelming some users, it's still an effective tool for spreading awareness and engaging new supporters.
 
-In this case, the rates of movement growth and social media promotion are equal, indicating that social media is not having a significant impact on the movement. The rate at which social media users become engaged in the movement (k1) is the same as the rate at which people disengage from it (k2), indicating a stable equilibrium. Similarly, the rate at which social media users become aware of the movement (k3) is the same as the rate at which people disengage from the movement due to social media overload (k5), indicating that social media is not promoting the movement more than it is causing users to disengage from it.
+    \subsubsection*{Conclusion}
+    The movement is likely to continue growing in popularity, but social media may need to find ways to reduce user overload and keep existing users engaged.
 
-Conclusion: The movement is likely to remain at a steady state, and social media is not having a significant impact on its growth or decline.
+    \subsubsection*{Case 7: $k_5 > k_4$ and $k_8 < k_7$}
+    In this case, social media overload is causing more people to disengage from the movement ($k_5 > k4$) than influencers are able to promote it ($k_4 < k_5$). Additionally, social media users are leaving the platform at a faster rate than they are joining it ($k_8 < k_7$), further reducing engagement.
 
-Case 5: $k_1 < k_2$ and $k_3 > k_5$
-
-In this case, the movement is losing momentum, but social media is still promoting it effectively. The rate at which social media users become engaged in the movement (k1) is less than the rate at which people disengage from it (k2), indicating a negative feedback loop. However, the rate at which social media users become aware of the movement (k3) is greater than the rate at which people disengage from the movement due to social media overload (k5). This implies that social media is still effectively promoting the movement despite its declining popularity.
-
-Conclusion: The movement is likely to continue losing momentum, but social media is still playing a significant role in its success. The declining engagement may be due to factors outside of social media, such as competing priorities or fatigue from long-term activism.
-Case 6: k4 > k5 and k8 > k7
-
-In this case, influencers are effectively promoting the movement (k4 > k5) and social media users are leaving the platform at a slower rate than they are joining it (k8 > k7). This means that while social media may be overwhelming some users, it's still an effective tool for spreading awareness and engaging new supporters.
-
-Conclusion: The movement is likely to continue growing in popularity, but social media may need to find ways to reduce user overload and keep existing users engaged.
-
-Case 7: k5 > k4 and k8 < k7
-In this case, social media overload is causing more people to disengage from the movement (k5 > k4) than influencers are able to promote it (k4 < k5). Additionally, social media users are leaving the platform at a faster rate than they are joining it (k8 < k7), further reducing engagement.
-
-Conclusion: The movement is likely to lose momentum and decline in popularity, as social media is no longer an effective tool for promoting it.
+    \subsubsection*{Conclusion}
+    The movement is likely to lose momentum and decline in popularity, as social media is no longer an effective tool for promoting it.
 
     \section{Results}
     \section{Discussion}
