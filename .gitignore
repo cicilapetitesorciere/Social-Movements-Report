@@ -7,4 +7,4 @@
 *.blg
 *.dvi
 *.pdf
-Simulation/__pycache__/*
+simulation/__pycache__/*
