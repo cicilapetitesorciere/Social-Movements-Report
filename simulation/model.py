@@ -1,8 +1,7 @@
 import sys
 import matplotlib.pyplot as plt
 
-from numpy import linspace
-from numpy import exp
+from numpy import linspace, sqrt
 from scipy.integrate import odeint
 from typing import Final
 
@@ -18,7 +17,7 @@ def model(y, t, scale, k1, k2, k3, k4, k5, k6, k7, k8):
 
     offline = scale - susceptible - exposed - infected
     
-    trending = k8*(1-exp(-infected))
+    trending = k8*sqrt(infected/scale)
 
     dy = [0,0,0]
 
@@ -66,7 +65,7 @@ def simulate_broad(k1, k2, k3, k4, k5, k6, k7, k8,nweeks=52):
 def legend():
     plt.legend(["Unfamiliar with the movement", "Aware of the movment, but not actively involved", "Actively involved in the movement"])
 
-SAVE_MODE = True
+SAVE_MODE = False
 def draw(filename=False):
     if (SAVE_MODE and type(filename).__name__ == 'str'):
         plt.savefig("plots/" + filename)
