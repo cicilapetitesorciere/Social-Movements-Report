@@ -1,9 +1,12 @@
 \documentclass{article}
 
 \usepackage{amsmath}
+\usepackage{nicefrac}
 \usepackage{diffcoeff}
 \usepackage{amsmath}
 \usepackage{tcolorbox}
+\usepackage{tikz}
+\tikzstyle{box}=[draw, fill=red!20, minimum size=2em]
 
 \title{AMATH 383 Project}
 \author{
@@ -86,20 +89,36 @@
 
     \item Influencers all have the same rate of being able to influence others (i.e there aren’t particularly more famous/influential online celebrities that are boosting the cause). 
 
-    \item People are equally likely to see trending posts. Once they do, they immediately become "exposed" and then decide if they would like to join the movement or not. 
+    \item People are equally likely to see trending posts. Once they do, they immediately become ``exposed" and then decide if they would like to join the movement or not. 
     
     \item People who leave the movement or decide not to join the movement after becoming exposed still use social media, so are then part of S(t). We assume they just forget their recent exposure/involvement with the movement and are completely unaware of it until they are exposed another time. 
     \end{enumerate}
     \subsection{Model Equations}
 
-     Let $I(t)$ be the number of people engaged in the social movement at time $t$, and let $E(t)$ be the number of social media users who are aware of the movement at time t. Let R(t) be the number of people recovering from using social media, meaning they stop using it completely. Let $S(t)$ be the number of active social media users at time t, let $P(t)$ be the population of the community where the social movement is taking place, and let $F(t)$ is the number of trending posts related to the movement at time $t$;
-
+     Let $I(t)$ be the number of people engaged in the social movement at time $t$, and let $E(t)$ be the number of social media users who are aware of the movement at time t. Let $R(t)$ be the number of people recovering from using social media, meaning they stop using it completely. Let $S(t)$ be the number of active social media users at time t, let $P(t)$ be the population of the community where the social movement is taking place, let N(t) be the complete population of the community, and let $F(t)$ is the number of trending posts related to the movement at time $t$;\\
+     \begin{figure}
+         \centering
+        \begin{tikzpicture}
+            \node [box] (S) {$S$};
+            \node [box, right of=S, node distance=5cm] (E) {$E$};
+            \node [box, below of=E, node distance=5cm] (I) {$I$};
+            \node [box, below of=S, node distance=5cm] (R) {$R$};
+            \node [above of=S, node distance=2cm] (out) {$\emptyset$};
+            \path[<->] (S) edge (E);
+            \path[->] (E) edge (I);
+            \path[->] (I) edge (S);
+            \path[->] (S) edge (R);
+            \path[->] (out) edge (S);
+        \end{tikzpicture}
+        \caption{A diagram of the model}
+    \end{figure}
+    \\
     Then, the following equations can be used:
     \begin{subequations}
     \begin{align}            
-        \diff St &= k_6 P(t) + k_2I(t) + k_5E(t) - k_3 {S(t)I(t)}- k_7S(t)
+        \diff St &= k_6 P(t) + k_2I(t) + k_5E(t) - k_3 {S(t)I(t)}- k_7S(t)-k_4 F(t)S(t)
         \\[10pt]
-        \diff Et &= k_3 I(t)S(t) + k_4 F(t) - k_5E(t) - k_1E(t)\left[1 - \frac{I(t)}{S(t)}\right] 
+        \diff Et &= k_3 I(t)S(t) + k_4 F(t) S(t) - k_5E(t) - k_1E(t)\left[1 - \frac{I(t)}{S(t)}\right] 
         \\[10pt]
         \diff It &= k_1 E(t) \left[1 - \frac{I(t)}{S(t)}\right] - k_2I(t)
         \\[10pt]
@@ -110,22 +129,22 @@
     where
     \begin{subequations}
     \begin{align}
-        P(t) &= S(t) + E(t) + I(t) + R(t)
+        P(t) &= N - S(t) - E(t) - I(t)
         \\[10pt]
-        F(t) &= k_8\left[1- e^{-I(t)}\right]
+        F(t) &= k_8\sqrt{\frac{I(t)} N}
     \end{align}
     \end{subequations}
 
     and where
     \begin{itemize}
-        \item $k_1$ is the rate at which exposed social media users become engaged in the movement;
-        \item $k_2$ is the rate at which actively engaged people leave the movement;
-        \item $k_3$ is the rate at which social media users become exposed/aware of the movement;
-        \item $k_4$ is the rate at which influencers promote the movement;
-        \item $k_5$ is the rate at which exposed people disengage from the movement;
-        \item $k_6$ is the rate at which the non social media using population (of the community where the movement is taking place) joins social media;
-        \item $k_7$ is the rate at which social media users leave the platform due to social media overload or other factors; and
-        \item $k_8$ is the maximum number of trending posts that can exist at a certain time $t$.
+        \item $k_1^{-1}$ is the minimum expected number of weeks it takes for a person to go from $E$ to $I$;
+        \item $k_2^{-1}$ is the expected number of weeks for a active member to leave the movement;
+        \item $k_3$ is the rate at which social media users become exposed/aware of the movement (measured in $[\text{people}]^{-1}\times[\text{weeks}]^{-1}$);
+        \item $k_4$ is the rate at which influencers promote the movement ; TODO
+        \item $k_5^{-1}$ is the expected number of weeks an exposed person disengages from the movement;
+        \item $k_6$ is the rate at which the non social media using population (of the community where the movement is taking place) joins social media (measured in $[\text{weeks}]^{-1}$);
+        \item $k_7$ is the expected number of weeks for a person to leave the platform due to social media overload or other factors; and
+        \item $k_8$ is the maximum number of trending posts that can be absorbed by a single person (measured in [posts]).
     \end{itemize}
     
     The first equation describes how the size of the movement changes over time, with the number of people becoming engaged in the movement being proportional to the number of social media users who are aware of it and the available population who may join the movement, but also subject to a rate of disengagement. 
@@ -142,10 +161,10 @@
     There are certain cases we can take into consideration and analyze depending on the parameters $k_1$ through $k_8$. Some of these cases are: 
 
 
-    \subsubsection*{Case 1: Rapid growth followed by quick decline, $k_1 > k_5$} \normalfont
+    \subsubsection*{Case 1: Rapid growth followed by quick decline, $k_1 \gg k_5$} \normalfont
     \begin{tcolorbox}
-    Assuming that k1  is much greater than k5, the social movement is likely to experience rapid growth as more and more social media users become engaged and stay involved. However, if k2 (rate of actively engaged people leaving the movement) is also high, the movement could fizzle out quickly as actively engaged individuals leave. If it was low, the movement could continue to grow and attract even more engaged individuals.
-    \subsubsection*{Conclusion}  The movement could experience rapid growth in its initial stages, but depending on k2, it could quickly decline. Therefore, it is important to strike a balance between retaining engaged individuals and allowing individuals who no longer align with the movement's goals to leave, in order to ensure the long-term success and impact of the movement.
+    Assuming that $k_1$  is much greater than $k_5$, the social movement is likely to experience rapid growth as more and more social media users become engaged and stay involved. However, if $k_2$ (rate of actively engaged people leaving the movement) is also high, the movement could fizzle out quickly as actively engaged individuals leave. If it was low, the movement could continue to grow and attract even more engaged individuals.
+    \subsubsection*{Conclusion}  The movement could experience rapid growth in its initial stages, but depending on $k_2$, it could quickly decline. Therefore, it is important to strike a balance between retaining engaged individuals and allowing individuals who no longer align with the movement's goals to leave, in order to ensure the long-term success and impact of the movement.
     \end{tcolorbox}
 
     \subsubsection*{Case 2: Struggling to gain traction, $k_3 < k_1$ and $k_3 < k_5$}
@@ -156,7 +175,7 @@
     
     \subsubsection*{Case 3: Influencers driving movement forward, $k_4 > k_5$} \normalfont
     \begin{tcolorbox}
-     In this case, influencers could play a key role in driving the movement forward by promoting it frequently. The movement is more likely to gain momentum and have a lasting impact. This is because influencers can help sustain engagement and encourage continued participation even as individuals may be exposed to negative or disengaging factors. By promoting the movement and highlighting its benefits and impact, influencers can motivate individuals to become engaged and invested in the movement. This can help sustain participation over time and mitigate the potential negative effects of disengagement among exposed individuals.
+     In this case, influencers could play a key role in driving the movement forward by promoting it frequently. The movement is more likely to gain momentum and have a lasting impact. This is because influencers can help sustain engagement and encourage continued participation even as individuals may be exposed to negative or disengaging factors. By promoting the movement and highlighting its benefits and impact, influencers can motivate individuals to become engaged and invested in the movement. This can help sustain participation over time and mitigate the potential negative effects of disengagement  exposed individuals.
     \subsubsection*{Conclusion}Tthe movement could continue to grow and thrive, even if some exposed individuals disengage. This case underscores the importance of the role of influencers in promoting a social movement and sustaining engagement over time. 
     \end{tcolorbox}
 
@@ -166,7 +185,7 @@
     \begin{tcolorbox}
    In this case, the movement has the potential to rapidly gain momentum and reach a wide audience. As more individuals in the community join social media, they become exposed to the movement and may become engaged and invested in its goals and objectives. This can help sustain momentum and encourage continued participation, particularly if efforts are made to retain engaged individuals and address negative factors contributing to disengagement. 
    
-   However, it is also important to consider the potential challenges associated with rapid growth and expansion. As the movement gains momentum and reaches a wider audience, it may become more difficult to maintain cohesion and direction, particularly if there are diverse opinions and perspectives among participants.
+   However, it is also important to consider the potential challenges associated with rapid growth and expansion. As the movement gains momentum and reaches a wider audience, it may become more difficult to maintain cohesion and direction, particularly if there are diverse opinions and perspectives  participants.
     \subsubsection*{Conclusion} In summary,  the case highlights the potential benefits and challenges associated with rapid growth and expansion in a social movement. By complementing efforts to increase visibility and engagement with broader strategies to manage growth and maintain cohesion, social movements can maximize their impact and reach a wider audience.
     \end{tcolorbox}
 
