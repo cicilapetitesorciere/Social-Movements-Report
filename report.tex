@@ -4,8 +4,11 @@
 \usepackage{nicefrac}
 \usepackage{diffcoeff}
 \usepackage{amsmath}
-\usepackage{tcolorbox}
 \usepackage{tikz}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{float}
+
 \tikzstyle{box}=[draw, fill=red!20, minimum size=2em]
 
 \title{AMATH 383 Project}
@@ -21,8 +24,10 @@
     \maketitle
 
     \section{Abstract}
+    This paper analyzes how social movements progress over social media. Social movements influence our everyday lives and can explain many sociological phenomena \cite{diani_networks_2013}. With the rise of social media, human interactions have evolved and can to be analyzed in new ways \cite{kidd_social_2016}. Using a mathematical SIR model the number of people actively participating, being aware of the movement and not knowing about it are calculated over a time span of a few weeks. With a few assumptions it is possible to analyze the parameters important to the spread of social movements on social media. BLABLABLA
+    
     \section{Introduction}
-    Social networks and movements have been a crucial part of society and open a window to explaining many phenomena such as herd mentality and what causes individuals to participate in social movements \cite{diani_networks_2013}. Opinions, values or grievances is often not enough to induce actions. Connections to people participating in a social movement are generally needed to make people act \cite{small_movements_2021}.
+    Social networks and movements have been a crucial part of society and open a window to explaining many phenomena such as herd mentality and what causes individuals to participate in social movements \cite{diani_networks_2013}. Opinions, values or grievances is often not enough to induce actions. Connections to people participating in a social movement are generally needed to make people act \cite{diani_networks_2013}
     
     Social movements themselves are a sociological analytical concept defined as networks of interactions, may they be informal or not, between different individuals, groups and organizations, who are engaged in political or cultural conflicts, on the basis of a shared collective identity. In other words, the important aspects that need to be considered, when defining the dynamics of a social movement are: 
     \begin{itemize}
@@ -43,16 +48,18 @@
     Using mathematical models, we aim to gain a deeper understanding how social movements progress with time over social media and if we can find a pattern between social movements and various parameters Specifically, we hope to find which parameters and what values are necessary for a social movement to spread and how can they be used as tools in order to spread a message.
 
     \section{Methods}
-
+   
+    Let $I(t)$ be the number of people engaged in the social movement at time t, and
+    let $E(t)$ be the number of social media users who are aware of the movement at time t. Let $S(t)$ be the number of active social media users at time t who are not aware of the movement at all, and let $P(t)$ be the population of the community where the social movement is taking place. 
     
-    Let $I(t)$ be the number of people engaged in the social movement at time t, and let $E(t)$ be the number of social media users who are aware of the movement at time t. Let $S(t)$ be the number of active social media users at time t who are not aware of the movement at all, and let $P(t)$ be the population of the community where the social movement is taking place. 
-    
-    We can relate our model equations to a type of SEIR model where $I(t)$ is the number of infected individuals, who are able to spread the disease to $S(t)$ who are the number of Susceptible people. In our case, this would mean people actively engaged in the movement would be exposing social media users through posts. 
+    We can relate our model equations to a type of SEIR disease model where $I(t)$ is the number of infected individuals, who are able to spread the disease to $S(t)$ who are the number of Susceptible people. In our case, this would mean people actively engaged in the movement would be exposing social media users through posts. 
     
     
     $E(t)$ acts as the exposed population, those who have come in contact with the disease, or in our case, those who have in come contact with the social movement by seeing social media posts about it. Similarly to how exposed individuals have a chance of becoming infected or going back to susceptible, in our model, those who are exposed to the movement can decide if they wish to actively engage in it or go back to being a part of the susceptible, $S(t)$.
-    
-    \textbf{Cite SIR model...} 
+
+    While no particular study relates the SEIR model to social movements and in particular social media, there are a few studies which involve analysing the use of social media alongside controlling the spread of diseases. Our model uses a similar analysis and techniques as some of these articles. [8,9]
+\textbf{https://pubmed.ncbi.nlm.nih.gov/33360131/}
+\textbf{https://pubmed.ncbi.nlm.nih.gov/29354394/}
     
     
     
@@ -84,7 +91,7 @@
     
     \item  The only way people can engage or become aware of the movement is through social media, particularly through posts that are being sent only by people already actively engaging in the movement, called infleuncers. 
     
-    \item  We assume that after some time posts tend to lost traction and no longer become trending. Thus, there can only exist a certain number of trending posts at any given period of time $t$.That is, $F(t)$ is a bounded function with maximum equal to $k_8$. 
+    \item  We assume that after some time posts tend to lost traction and no longer become trending. Thus, there can only exist a certain number of trending posts at any given period of time $t$. That is, $F(t)$ is a bounded function with maximum equal to $k_8$. 
 
     \item Influencers all have the same rate of being able to influence others (i.e there aren’t particularly more famous/influential online celebrities that are boosting the cause). 
 
@@ -93,8 +100,8 @@
     \item People who leave the movement or decide not to join the movement after becoming exposed still use social media, so are then part of S(t). We assume they just forget their recent exposure/involvement with the movement and are completely unaware of it until they are exposed another time. 
     \end{enumerate}
     \subsection{Model Equations}
-
-     Let $I(t)$ be the number of people engaged in the social movement at time $t$, and let $E(t)$ be the number of social media users who are aware of the movement at time t. Let $R(t)$ be the number of people recovering from using social media, meaning they stop using it completely, thus it's a particular subset of P(t). Let $S(t)$ be the number of active social media users at time t, let $P(t)$ be the population of the community where the social movement is taking place, let N(t) be the complete population of the community, and let $F(t)$ is the number of trending posts related to the movement at time $t$;\\
+     Let N(t) be the complete population of the community considered, in other words the community, where the social movement is taking place.
+     Let $I(t)$ be the number of people engaged in the social movement at time $t$, and let $E(t)$ be the number of social media users who are aware of the movement at time t. Let $R(t)$ be the number of people recovering from using social media, meaning they stop using it completely, thus it's a particular subset of P(t). Let $S(t)$ be the number of active social media users at time t, let $P(t)$ be the population of the community that does not use social media and let $F(t)$ is the number of trending posts related to the movement at time $t$;\\
      \begin{figure}
          \centering
         \begin{tikzpicture}
@@ -136,14 +143,14 @@
 
     and where
     \begin{itemize}
-        \item $1/k_1$ is the minimum expected number of weeks it takes for a person to go from $E$ to $I$;
-        \item $1/k_2$ is the expected number of weeks for a active member to leave the movement;
-        \item $k_3$ is the rate at which social media users become exposed/aware of the movement (measured in $[\text{people}]^{-1}\times[\text{weeks}]^{-1}$);
-        \item $k_4$ is the rate at which influencers promote the movement ; TODO
-        \item $1/k_5$ is the expected number of weeks an exposed person disengages from the movement;
-        \item $k_6$ is the rate at which the non social media using population (of the community where the movement is taking place) joins social media (measured in $[\text{weeks}]^{-1}$);
-        \item $k_7$ is the expected number of weeks for a person to leave the platform due to social media overload or other factors; and
-        \item $k_8$ is the maximum number of trending posts that can be absorbed by a single person (measured in [posts]).
+        \item $1/k_1$ is the minimum expected number of weeks it takes for a person to go from $E$ to $I$. In other words the time it takes for an individual on social media to be exposed to the movement;
+        \item $1/k_2$ is the expected number of weeks for an active member to loose interest and leave the movement;
+        \item $k_3$ is the rate at which social media users become exposed and are aware of the movement (measured in $[\text1/{people*weeks}]$);
+        \item $k_4$ is the rate at which influencers promote the movement and thus make more people aware of the movement; 
+        \item $1/k_5$ is the expected number of weeks an exposed person looses interest and disengages from the movement;
+        \item $k_6$ is the rate at which the non social media using population joins social media (measured in $[\text1/{weeks}]$);
+        \item $k_7$ is the expected number of weeks for a person to leave the platform due to social media overload or other factors; 
+        \item $k_8$ is the maximum number of trending posts that can be absorbed by a single person (measured in [posts]). Which is a phenomenon called the law of diminishing returns. \textbf{CITE Dhaoui und Webster}
     \end{itemize}
     
     The first equation describes how the size of the movement changes over time, with the number of people becoming engaged in the movement being proportional to the number of social media users who are aware of it and the available population who may join the movement, but also subject to a rate of disengagement. 
@@ -157,61 +164,109 @@
 
     \section{Results}
     
-    There are certain cases we can take into consideration and analyze depending on the parameters $k_1$ through $k_8$. The cases chosen are: 
+    There are certain cases we can take into consideration and analyze depending on the parameters $k_1$ through $k_8$. In order to simplify the analysis the parameters not relevant to the specific case are set to a default value which is equal to 0.5. If the default value is changed, the pattern of the graph is scaled inversely to the change of the k value.
+    The time length considered in each case varies in the number of months, such that the graphs can be easily interpreted. The initial distribution of the number of people to each category is the following: R(0) and E(0) = 0, and S(0) and I(0) start with multiple values in between a \textbf{certain range}, 
 
 
     \subsubsection*{Case 1: Rapid growth followed by quick decline, $k_1 \gg k_5$} \normalfont
-    \begin{tcolorbox}
     Assuming that $k_1$  is much greater than $k_5$, the social movement is likely to experience rapid growth as more and more social media users become engaged and stay involved. However, if $k_2$ (rate of actively engaged people leaving the movement) is also high, the movement could fizzle out quickly as actively engaged individuals leave. If it was low, the movement could continue to grow and attract even more engaged individuals.
-    \subsubsection*{Interpretation}  The movement could experience rapid growth in its initial stages, but depending on $k_2$, it could quickly decline. Therefore, it is important to strike a balance between retaining engaged individuals and allowing individuals who no longer align with the movement's goals to leave, in order to ensure the long-term success and impact of the movement.
-    \end{tcolorbox}
+
+    Figure \ref{fig:case1_lowk2} shows an increase of people aware and also actively involved in the movement. Depending on the initial values the number of people who are unaware of the movement increase or decrease and stabilise at a frequency of around 0.3. The number of people who are aware and the number of people who are in the movement stabilize both at around 0.2, with the actively involved people stabilizing at a slightly higher frequency.
+    In Figure \ref{fig:case1_highk2} on the other hand, the movement dies down
+    
+    \subsubsection*{Interpretation}  While the movement experiences rapid growth in its initial stages, the frequencies stabilize after a few weeks. The limit depends on $k_2$. If $k_2$ is low all three categories stabilize at a limit bigger than zero [Figure \ref{fig:case1_lowk2}]. However, if $k_2$ is high the movement dies out after only  a few weeks [Figure \ref{fig:case1_highk2}]. Therefore, it is important to strike a balance between retaining engaged individuals and allowing individuals who no longer align with the movement's goals to leave, in order to ensure the long-term success and impact of the movement.
+
+    \begin{figure}[H]
+
+        \centering
+        \includegraphics[width=\textwidth]{simulation/plots/case1-lowk2.png}   
+        \caption{Many overlaid time series of the model involving \mbox{$k_1=.9$} , \mbox{$k_2=.2$}, \mbox{$k_5=.1$}}
+        \label{fig:case1_lowk2}
+    \end{figure}
+
+    \begin{figure}[H]
+
+        \centering
+        \includegraphics[width=\textwidth]{simulation/plots/case1-highk2.png}   
+        \caption{Many overlaid time series of the model involving \mbox{$k_1=.9$}, \mbox{$k_2=.8$}, \mbox{$k_5=.1$}}
+        \label{fig:case1_highk2}
+    \end{figure}
+
 
     \subsubsection*{Case 2: Struggling to gain traction, $k_3 < k_1$ and $k_3 < k_5$}
-    \begin{tcolorbox}
     Assuming that $k_3$ is much smaller than $k_1$ and $k_5$, the social movement may struggle to gain traction as social media users are not becoming aware of the movement at a fast enough rate, and exposed individuals are disengaging quickly. However, if the rate at which influencers promote the movement ($k_4$) is high, then the movement could still gain traction and attract more engaged individuals, despite a slow initial growth.
     \subsubsection*{Interpretation} The movement  struggles to gain momentum and grow but may gain some traction if $k_4$ is high. Therefore, it is important to consider both the rate of exposure to the movement and the influence of key individuals in promoting and sustaining momentum for the movement.
-    \end{tcolorbox}
+    \begin{figure}[H]
+
+        \centering
+        \includegraphics[width=\textwidth]{simulation/plots/case2-lowk4.png}   
+        \caption{Many overlaid time series of the model involving \mbox{$k_1=.7$}, \mbox{$k_3=.1$}, \mbox{$k_5=.7$}}
+        \label{fig:case2_lowk4}
+    \end{figure}
     
     \subsubsection*{Case 3: Influencers driving movement forward, $k_4 > k_5$} \normalfont
-    \begin{tcolorbox}
+ 
      In this case, influencers could play a key role in driving the movement forward by promoting it frequently. The movement is more likely to gain momentum and have a lasting impact. This is because influencers can help sustain engagement and encourage continued participation even as individuals may be exposed to negative or disengaging factors. By promoting the movement and highlighting its benefits and impact, influencers can motivate individuals to become engaged and invested in the movement. This can help sustain participation over time and mitigate the potential negative effects of disengagement  exposed individuals.
     \subsubsection*{Interpretation}The movement could continue to grow and thrive, even if some exposed individuals disengage. This case underscores the importance of the role of influencers in promoting a social movement and sustaining engagement over time. 
-    \end{tcolorbox}
 
+    \begin{figure}[H]
+
+        \centering
+        \includegraphics[width=\textwidth]{simulation/plots/case3.png}   
+        \caption{Many overlaid time series of the model involving \mbox{$k_4=.9$}, \mbox{$k_5=.2$}}
+        \label{fig:case3}
+    \end{figure}
 
 
     \subsubsection*{Case 4: Sudden spike in engagement but high risk of burnout, $k_6 > k_3$ \normalfont{and} $k_6 > k_5$}
-    \begin{tcolorbox}
    In this case, the movement has the potential to rapidly gain momentum and reach a wide audience. As more individuals in the community join social media, they become exposed to the movement and may become engaged and invested in its goals and objectives. This can help sustain momentum and encourage continued participation, particularly if efforts are made to retain engaged individuals and address negative factors contributing to disengagement. 
    
    However, it is also important to consider the potential challenges associated with rapid growth and expansion. As the movement gains momentum and reaches a wider audience, it may become more difficult to maintain cohesion and direction, particularly if there are diverse opinions and perspectives  participants.
     \subsubsection*{Interpretation} In summary,  this case highlights the potential benefits and challenges associated with rapid growth and expansion in a social movement. By complementing efforts to increase visibility and engagement with broader strategies to manage growth and maintain cohesion, social movements can maximize their impact and reach a wider audience.
     This case only concerns itself conceptually with the number of people. Therefor there is no graph to represent it as it will stabilize itself at similar ratios as the other graphs.
-    \end{tcolorbox}
 
     \subsubsection*{Case 5: $k_3 > k_6$}
-    \begin{tcolorbox}
     In this case, the movement may struggle to gain traction and expand its reach beyond initial participants.
     
-    While efforts to raise awareness of the movement among existing social media users may help to generate initial interest and support, the movement may struggle to expand its reach beyond this initial group without effective strategies for engaging individuals who are not already using social media.
+    While efforts to raise awareness of the movement  existing social media users may help to generate initial interest and support, the movement may struggle to expand its reach beyond this initial group without effective strategies for engaging individuals who are not already using social media.
     
-    In such a scenario, it may be useful to consider strategies for increasing social media adoption among non-users, such as targeted advertising or outreach efforts. Additionally, efforts to establish partnerships with organizations and groups outside of social media can help to generate broader support and reach individuals who may not be engaged through social media alone.
+    In such a scenario, it may be useful to consider strategies for increasing social media adoption  non-users, such as targeted advertising or outreach efforts. Additionally, efforts to establish partnerships with organizations and groups outside of social media can help to generate broader support and reach individuals who may not be engaged through social media alone.
     \subsubsection*{Interpretation}
     The movement is likely to plateau and fails to reach new individuals. The case highlights the potential challenges associated with relying solely on social media to promote and sustain a social movement. By complementing efforts to increase awareness and engagement on social media with strategies for engaging non-users and establishing partnerships with organizations outside of social media, social movements can maximize their impact and expand their reach beyond initial participants.
-    \end{tcolorbox}
+
+    \begin{figure}[H]
+
+        \centering
+        \includegraphics[width=\textwidth]{simulation/plots/case5.png}   
+        \caption{Many overlaid time series of the model involving \mbox{$k_3=.8$}, \mbox{$k_6=.3$}}
+        \label{fig:case5}
+    \end{figure}
+
 
     \subsubsection*{Case 6: $k_4 > k_5$ \normalfont{and} $k_8 > k_7$}
-    \begin{tcolorbox}
     In this case, influencers are effectively promoting the movement ($k_4 > k_5$) and social media users are leaving the platform at a slower rate than they are joining it ($k_8 > k_7$). This means that while social media may be overwhelming some users, it's still an effective tool for spreading awareness and engaging new supporters.
     \subsubsection*{Interpretation}
     The movement is likely to continue growing in popularity, but social media may need to find ways to reduce user overload and keep existing users engaged.
-    \end{tcolorbox}
 
+    \begin{figure}[H]
+
+        \centering
+        \includegraphics[width=\textwidth]{simulation/plots/case6.png}   
+        \caption{Many overlaid time series of the model involving \mbox{$k_4=.7$}, \mbox{$k_5=.3$}, \mbox{$k_7=.3$}, \mbox{$k_8=.7$}}
+        \label{fig:case6}
+    \end{figure}
 
     \section{Discussion}
+
+    
+
+
+    A few ways to increase accuracy of our results would be varying the constant paramaters $k_1$ to $k_8$ in each of the cases. For accuracy purposes, we should conduct all the cases with varying case parameters as well, for instance, having $k_1,k_5 = 0.99$ and $k_3 = 0.01$ in case 2, etc. However, after analysing these different cases, there didn't seem to be any significant differences with what we already had. 
+
+    For example, conducting all the cases with a base value of $0.2$ or $0.7$ instead of just $0.5$.
+
     \newpage
     \bibliographystyle{plain}
     \bibliography{references}
-    
 
 \end{document}
