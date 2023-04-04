@@ -85,7 +85,7 @@ def simulate_broad(k1_vals=default_k_vals,
 
 
 def add_labels():
-    plt.legend(["Unfamiliar with the movement", "Aware of the movment, but not actively involved", "Actively involved in the movement"])
+    plt.legend(["Unfamiliar with the movement", "Aware of the movement, but not actively involved", "Actively involved in the movement"])
     plt.ylabel("Frequency")
     plt.xlabel("Time (weeks)")
 
