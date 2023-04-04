@@ -51,23 +51,46 @@ def simulate_specific(  k1, k2, k3, k4, k5, k6, k7, k8,
         args = (n, k1, k2, k3, k4, k5, k6, k7, k8)
     )
 
-    plt.plot(t_axis, simulation[:,SUSCEPTIBLE_ENUM], color="tab:green", linewidth=0.5)
-    plt.plot(t_axis, simulation[:,EXPOSED_ENUM], color="tab:orange", linewidth=0.5)
-    plt.plot(t_axis, simulation[:,INFECTED_ENUM], color="tab:blue", linewidth=0.5)
+    lwidth = 1
+    plt.plot(t_axis, simulation[:,SUSCEPTIBLE_ENUM], color="tab:green", linewidth=lwidth)
+    plt.plot(t_axis, simulation[:,EXPOSED_ENUM], color="tab:orange", linewidth=lwidth)
+    plt.plot(t_axis, simulation[:,INFECTED_ENUM], color="tab:blue", linewidth=lwidth)
     
 
-def simulate_broad(k1, k2, k3, k4, k5, k6, k7, k8,nweeks=52):
-    for iinf in [0.005, 0.01, 0.015]:
-        for isus in linspace(0.1,0.9):
-            simulate_specific(k1, k2, k3, k4, k5, k6, k7, k8,initial_infected=iinf, initial_susceptible=isus, t_lim_upper=nweeks)
+default_k_vals = [.5]
+
+def simulate_broad(k1_vals=default_k_vals, 
+                   k2_vals=default_k_vals, 
+                   k3_vals=default_k_vals, 
+                   k4_vals=default_k_vals, 
+                   k5_vals=default_k_vals, 
+                   k6_vals=default_k_vals, 
+                   k7_vals=default_k_vals, 
+                   k8_vals=default_k_vals, 
+                   iinf_vals=linspace(0.005, 0.1, num=5), 
+                   isus_vals=linspace(0.1,0.9, num=5),
+                   nweeks=52):
+    for k1 in k1_vals:
+        for k2 in k2_vals:
+            for k3 in k3_vals:
+                for k4 in k4_vals:
+                    for k5 in k5_vals:
+                        for k6 in k6_vals:
+                            for k7 in k7_vals:
+                                for k8 in k8_vals:
+                                    for iinf in iinf_vals:
+                                        for isus in isus_vals:
+                                            simulate_specific(k1, k2, k3, k4, k5, k6, k7, k8, initial_infected=iinf, initial_susceptible=isus, t_lim_upper=nweeks)
+    add_labels()
 
 
-def legend():
+def add_labels():
     plt.legend(["Unfamiliar with the movement", "Aware of the movment, but not actively involved", "Actively involved in the movement"])
+    plt.ylabel("Frequency")
+    plt.xlabel("Time (weeks)")
 
-SAVE_MODE = False
-def draw(filename=False):
-    if (SAVE_MODE and type(filename).__name__ == 'str'):
+def draw(filename=False, save_mode=False):
+    if (save_mode and type(filename).__name__ == "str"):
         plt.savefig("plots/" + filename)
     else:
         plt.show()
