@@ -24,7 +24,7 @@
     \maketitle
 
     \section{Abstract}
-    This paper analyzes how social movements progress over social media. Social movements influence our everyday lives and can explain many sociological phenomena \cite{diani_networks_2013}. With the rise of social media, human interactions have evolved and can to be analyzed in new ways \cite{kidd_social_2016}. Using a mathematical SIR model the number of people actively participating, being aware of the movement and not knowing about it are calculated over a time span of a few weeks. With a few assumptions it is possible to analyze the parameters important to the spread of social movements on social media. BLABLABLA
+    This paper analyzes how social movements progress over social media. Social movements influence our everyday lives and can explain many sociological phenomena \cite{diani_networks_2013}. With the rise of social media, human interactions have evolved and can to be analyzed in new ways \cite{kidd_social_2016}. Using a mathematical SIR model the number of people actively participating, being aware of the movement and not knowing about it are calculated over a time span of a few weeks. With a few assumptions it is possible to analyze the parameters important to the spread of social movements on social media. 
     
     \section{Introduction}
     Social networks and movements have been a crucial part of society and open a window to explaining many phenomena such as herd mentality and what causes individuals to participate in social movements \cite{diani_networks_2013}. Opinions, values or grievances is often not enough to induce actions. Connections to people participating in a social movement are generally needed to make people act \cite{diani_networks_2013}
@@ -143,11 +143,11 @@
 
     and where
     \begin{itemize}
-        \item $1/k_1$ is the minimum expected number of weeks it takes for a person to go from $E$ to $I$. In other words the time it takes for an individual on social media to be exposed to the movement;
-        \item $1/k_2$ is the expected number of weeks for an active member to loose interest and leave the movement;
+        \item $k_1$ is the inverse of the minimum expected number of weeks it takes for a person to go from $E$ to $I$. In other words the time it takes for an individual on social media to be exposed to the movement;
+        \item $k_2$ is the inverse of the expected number of weeks for an active member to loose interest and leave the movement;
         \item $k_3$ is the rate at which social media users become exposed and are aware of the movement (measured in $[\text1/{people*weeks}]$);
         \item $k_4$ is the rate at which influencers promote the movement and thus make more people aware of the movement; 
-        \item $1/k_5$ is the expected number of weeks an exposed person looses interest and disengages from the movement;
+        \item $k_5$ is the inverse of the expected number of weeks an exposed person looses interest and disengages from the movement;
         \item $k_6$ is the rate at which the non social media using population joins social media (measured in $[\text1/{weeks}]$);
         \item $k_7$ is the expected number of weeks for a person to leave the platform due to social media overload or other factors; 
         \item $k_8$ is the maximum number of trending posts that can be absorbed by a single person (measured in [posts]). Which is a phenomenon called the law of diminishing returns. \textbf{CITE Dhaoui und Webster}
@@ -165,17 +165,18 @@
     \section{Results}
     
     There are certain cases we can take into consideration and analyze depending on the parameters $k_1$ through $k_8$. In order to simplify the analysis the parameters not relevant to the specific case are set to a default value which is equal to 0.5. If the default value is changed, the pattern of the graph is scaled inversely to the change of the k value.
-    The time length considered in each case varies in the number of months, such that the graphs can be easily interpreted. The initial distribution of the number of people to each category is the following: R(0) and E(0) = 0, and S(0) and I(0) start with multiple values in between a \textbf{certain range}, 
+    The time length considered in each case varies in the number of months, such that the graphs can be easily interpreted. The initial distribution of the number of people to each category is the following: E starts at 0, S starts with 5 numbers equally spaced out in between 0.1 and 0.9 and I starts with 5 numbers equally spaced out in between 0.005 and 0.1 start with multiple values in between a \textbf{certain range}, 
+    For all the graphs we only consider the people of the population who are on social media. The Frequency on the y-axis is the ratio of a specific group over the entire population considered.
 
 
     \subsubsection*{Case 1: Rapid growth followed by quick decline, $k_1 \gg k_5$} \normalfont
     Assuming that $k_1$  is much greater than $k_5$, the social movement is likely to experience rapid growth as more and more social media users become engaged and stay involved. However, if $k_2$ (rate of actively engaged people leaving the movement) is also high, the movement could fizzle out quickly as actively engaged individuals leave. If it was low, the movement could continue to grow and attract even more engaged individuals.
 
     Figure \ref{fig:case1_lowk2} shows an increase of people aware and also actively involved in the movement. Depending on the initial values the number of people who are unaware of the movement increase or decrease and stabilise at a frequency of around 0.3. The number of people who are aware and the number of people who are in the movement stabilize both at around 0.2, with the actively involved people stabilizing at a slightly higher frequency.
-    In Figure \ref{fig:case1_highk2} on the other hand, the movement dies down
+    In Figure \ref{fig:case1_highk2} on the other hand, the movement dies down after only a few weeks, so the number of people who know about it goes to zero. The number of people who are on social media but are unfamiliar with the movement stabilizes at around 0.5, because there will always be a certain amount of people who will not be on social media and the rate of people leaving and joining social media have the same values. The stabilization also occurs much quicker than in Figure \ref{fig:case1_lowk2}. 
     
     \subsubsection*{Interpretation}  While the movement experiences rapid growth in its initial stages, the frequencies stabilize after a few weeks. The limit depends on $k_2$. If $k_2$ is low all three categories stabilize at a limit bigger than zero [Figure \ref{fig:case1_lowk2}]. However, if $k_2$ is high the movement dies out after only  a few weeks [Figure \ref{fig:case1_highk2}]. Therefore, it is important to strike a balance between retaining engaged individuals and allowing individuals who no longer align with the movement's goals to leave, in order to ensure the long-term success and impact of the movement.
-
+    
     \begin{figure}[H]
 
         \centering
@@ -194,8 +195,12 @@
 
 
     \subsubsection*{Case 2: Struggling to gain traction, $k_3 < k_1$ and $k_3 < k_5$}
-    Assuming that $k_3$ is much smaller than $k_1$ and $k_5$, the social movement may struggle to gain traction as social media users are not becoming aware of the movement at a fast enough rate, and exposed individuals are disengaging quickly. However, if the rate at which influencers promote the movement ($k_4$) is high, then the movement could still gain traction and attract more engaged individuals, despite a slow initial growth.
-    \subsubsection*{Interpretation} The movement  struggles to gain momentum and grow but may gain some traction if $k_4$ is high. Therefore, it is important to consider both the rate of exposure to the movement and the influence of key individuals in promoting and sustaining momentum for the movement.
+    Assuming that $k_3$ is much smaller than $k_1$ and $k_5$, the social movement may struggle to gain traction as social media users are not becoming aware of the movement at a fast enough rate, and exposed individuals are disengaging quickly. 
+
+    In Figure \ref{fig:case2_lowk4} similar to Case 1 with a high $k_2$ the movement dies down and the frequency of people on social media who are unfamiliar with the movement stabilizes again at around 0.5.
+    
+    \subsubsection*{Interpretation} The movement  struggles to gain momentum and grow and eventually it dies out. However, if the rate at which influencers promote the movement ($k_4$) is high, then the movement could still gain traction and attract more engaged individuals, despite a slow initial growth. After trying, we have concluded, that the $k_4$ value alone is not sufficient to save the moment, the values of other parameters need to be adjusted as well. Therefore, it is important to consider both the rate of exposure to the movement and the influence of key individuals in promoting and sustaining momentum for the movement.
+    
     \begin{figure}[H]
 
         \centering
@@ -206,8 +211,11 @@
     
     \subsubsection*{Case 3: Influencers driving movement forward, $k_4 > k_5$} \normalfont
  
-     In this case, influencers could play a key role in driving the movement forward by promoting it frequently. The movement is more likely to gain momentum and have a lasting impact. This is because influencers can help sustain engagement and encourage continued participation even as individuals may be exposed to negative or disengaging factors. By promoting the movement and highlighting its benefits and impact, influencers can motivate individuals to become engaged and invested in the movement. This can help sustain participation over time and mitigate the potential negative effects of disengagement  exposed individuals.
-    \subsubsection*{Interpretation}The movement could continue to grow and thrive, even if some exposed individuals disengage. This case underscores the importance of the role of influencers in promoting a social movement and sustaining engagement over time. 
+     In this case, influencers could play a key role in driving the movement forward by promoting it frequently. The movement is more likely to gain momentum and have a lasting impact. This is because influencers can help sustain engagement and encourage continued participation even as individuals may be exposed to negative or disengaging factors. By promoting the movement and highlighting its benefits and impact, influencers can motivate individuals to become engaged and invested in the movement. This can help sustain participation over time and mitigate the potential negative effects of disengagement on exposed individuals.
+
+    In Figure \ref{fig:case3} the frequency of people unfamiliar with the movement stabilize at around 0.4, whereas the frequencies of the other two groups stabilize at around 0.1. Comparing to Figure \ref{fig:case1_lowk2} this time the limit of the frequency of people who are actively involved in the movement is a bit below the limit for those who are aware but not actively involved.
+     
+    \subsubsection*{Interpretation}The movement continues to thrive, even if some exposed individuals disengage. This case underscores the importance of the role of influencers in promoting a social movement and sustaining engagement over time. 
 
     \begin{figure}[H]
 
@@ -223,7 +231,7 @@
    
    However, it is also important to consider the potential challenges associated with rapid growth and expansion. As the movement gains momentum and reaches a wider audience, it may become more difficult to maintain cohesion and direction, particularly if there are diverse opinions and perspectives  participants.
     \subsubsection*{Interpretation} In summary,  this case highlights the potential benefits and challenges associated with rapid growth and expansion in a social movement. By complementing efforts to increase visibility and engagement with broader strategies to manage growth and maintain cohesion, social movements can maximize their impact and reach a wider audience.
-    This case only concerns itself conceptually with the number of people. Therefor there is no graph to represent it as it will stabilize itself at similar ratios as the other graphs.
+    This case only concerns itself conceptually with the number of people. Therefore there is no graph to represent it as it will stabilize itself at similar ratios as the other graphs.
 
     \subsubsection*{Case 5: $k_3 > k_6$}
     In this case, the movement may struggle to gain traction and expand its reach beyond initial participants.
@@ -231,8 +239,11 @@
     While efforts to raise awareness of the movement  existing social media users may help to generate initial interest and support, the movement may struggle to expand its reach beyond this initial group without effective strategies for engaging individuals who are not already using social media.
     
     In such a scenario, it may be useful to consider strategies for increasing social media adoption  non-users, such as targeted advertising or outreach efforts. Additionally, efforts to establish partnerships with organizations and groups outside of social media can help to generate broader support and reach individuals who may not be engaged through social media alone.
+
+    As can be seen in Figure \ref{fig:case5} the awareness of the movement increases initially but slowly dies down, as predicted. What is interesting in this case, is that even though $k_3$ is much higher than $k_6$ (see the Figure Caption) not all of the social media users will be familiar with the movement. This might be due to the parameters $k_2$ and $k_5$ of people leaving the movement, whether they were active or not. Since both of these parameters are relatively high (default value of 0.5) they have a large influence on the group sizes. 
+    
     \subsubsection*{Interpretation}
-    The movement is likely to plateau and fails to reach new individuals. The case highlights the potential challenges associated with relying solely on social media to promote and sustain a social movement. By complementing efforts to increase awareness and engagement on social media with strategies for engaging non-users and establishing partnerships with organizations outside of social media, social movements can maximize their impact and expand their reach beyond initial participants.
+    Depending on multiple parameters, the movement is likely to plateau and fails to reach new individuals. Since our model allows for people to loose and regain interest in the movement it will stabilize after a some weeks. This case highlights the potential challenges associated with relying solely on social media to promote and sustain a social movement. By complementing efforts to increase awareness and engagement on social media with strategies for engaging non-users and establishing partnerships with organizations outside of social media, social movements can maximize their impact and expand their reach beyond initial participants.
 
     \begin{figure}[H]
 
@@ -245,8 +256,10 @@
 
     \subsubsection*{Case 6: $k_4 > k_5$ \normalfont{and} $k_8 > k_7$}
     In this case, influencers are effectively promoting the movement ($k_4 > k_5$) and social media users are leaving the platform at a slower rate than they are joining it ($k_8 > k_7$). This means that while social media may be overwhelming some users, it's still an effective tool for spreading awareness and engaging new supporters.
+
+    As can be seen in Figure \ref{fig:case6} the three groups stabilize after a few weeks at non zero values. This shows that the social movement will be continued on at that level for some time until one of the parameter changes.
     \subsubsection*{Interpretation}
-    The movement is likely to continue growing in popularity, but social media may need to find ways to reduce user overload and keep existing users engaged.
+    The movement is likely to continue growing in popularity, but social media may need to find ways to reduce user overload and keep existing users engaged. In real life the parameters are probably going to change after some time, which means that the system will never stabilize.
 
     \begin{figure}[H]
 
@@ -257,16 +270,19 @@
     \end{figure}
 
     \section{Discussion}
+    DO WE EVER REALLY GO BACK TO OUR INITIAL QUESTION HERE? MIGHT BE WORTH TO ADD IT TO THE DISCUSSION
 
+    Social movements are much more dynamic than shown in our model. They can grow or die down within hours to years, depending on how the circumstances change, how the movement and its goals is interacted with as a society and not only on social media \textbf{CITE Hiller}. Our model simplifies this complex movement and puts it into a world without any exterior influences who could change the parameters. This means, that the most 'realistic' part of the graphs might only be the first week or so, since the real world never gives a specific movement enough time to stabilize itself.
     
+    
+    After working with and interpreting a few cases for our model, we observe that our functions all seem to stabilise, but just with varying speeds and limits. This is to be expected as our main goal was to analyze how quickly social movements grow with varying social media exposure, influencing power, and active social media user rather than working with stability cases like what we've seen in our lectures. 
+    
+    From the case analysis graphs, we can see that social media does in fact play a role in boosting growth of social movements, but only when accompanied by other factors. For instance, if we have a large amount of influencers/infected individuals but their rate of infecting is very low for various reasons such as bad quality posts or not reaching the proper demographic, then their efforts won't be as effective. Thus, if politicians or those in a social movement decide to use their resources on social media, they have to ensure that it's effective and properly correlates to the demographics that they're trying to persuade. 
 
-
-    A few ways to increase accuracy of our results would be varying the constant paramaters $k_1$ to $k_8$ in each of the cases. For accuracy purposes, we should conduct all the cases with varying case parameters as well, for instance, having $k_1,k_5 = 0.99$ and $k_3 = 0.01$ in case 2, etc. However, after analysing these different cases, there didn't seem to be any significant differences with what we already had. 
-
-    For example, conducting all the cases with a base value of $0.2$ or $0.7$ instead of just $0.5$.
+    A few ways to increase accuracy of our results would be varying the constant parameters $k_1$ to $k_8$ in each of the cases. For accuracy purposes, we should conduct all the cases with varying case parameters as well, for instance, having $k_1,k_5 = 0.99$ and $k_3 = 0.01$ in case 2, etc. However, after analysing these different cases, there didn't seem to be any significant differences with what we already found. Another suggestion would be conducting the study with with a base value of $0.2$ or $0.7$ instead of just $0.5$. This would help us analyze how fast social movements grow and stabilise with varying exposure to social media. A more accurate model would be to add another variable, or change the parameters to variables, as it would be easier to model the changes within the movement and the world that surrounds it.
 
     \newpage
     \bibliographystyle{plain}
     \bibliography{references}
-
+    \section{Appendix}
 \end{document}
